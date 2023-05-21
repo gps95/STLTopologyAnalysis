@@ -12,7 +12,7 @@
 #include "facet.h"
 
 // settings//TODO: have a config file
-const long double ANGLELIMIT=0.2;
+const long double ANGLELIMIT=0.3;
 const bool INHIBANGLELIMIT=false;
 const bool DEBUG=true;
 std::string OUTPUTPATH= "D:\\VSPROJECTS\\MyProjects\\STLSeparator\\OUTPUT\\";
@@ -103,7 +103,7 @@ void bfs(int pos,std::unordered_set<Facet*,Facet::hashFunction> &ret,std::vector
   }
   //debug info
   if(DEBUG)
-    std::cout<<ret.begin()._Ptr->_Myval->toString()<<"\n"<<Coord3d::hashFunction()(ret.begin()._Ptr->_Myval->getUV())<<"\n";
+    std::cout<<ret.begin()._Ptr->_Myval->toString()<<"\n"<<Coord3d::hashFunction()(ret.begin()._Ptr->_Myval->getUV())<<"\n"<<"N Facets:" <<ret.size()<<"\n";
 }
 
 //Performs the topology analysis
