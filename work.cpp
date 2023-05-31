@@ -7,10 +7,17 @@
 #include <cmath>
 #include <format>
 
-#include "mytypes.h"
 #include "coord3d.h"
 #include "facet.h"
 
+//TODO / UPGRADES
+/*
+Have a config file for settings
+-Make a Planar analysis version of the tool:
+It uses a hashmap of Facets to classify according to Plane normal and Plane equation
+-Make a combination of Planar and bfs approach:
+Full bfs,full planar, planar first and then bfs if map size is 1,planar + bfs at the same time(double analysis)
+*/
 // settings//TODO: have a config file
 const long double ANGLELIMIT=0.3;
 const bool INHIBANGLELIMIT=false;
@@ -25,7 +32,7 @@ void readFile(std::ifstream &in,std::vector<Facet> &fvec){
     //read facet and normal vector
     // s is "facet" or "endsolid"
     if(s=="endsolid")return;
-    ld x,y,z;
+    double x,y,z;
     in >> s >> x >> y >> z;// normal + coordinates
     Coord3d uv(x,y,z);
     //read 3 vertex + coordinates:
@@ -89,7 +96,7 @@ void bfs(int pos,std::unordered_set<Facet*,Facet::hashFunction> &ret,std::vector
         {//calculate angle and check with ANGLELIMIT
           f->norm();
           aux->norm();
-          ld angle = abs(f->dot(*aux));
+          double angle = abs(f->dot(*aux));
           if(INHIBANGLELIMIT || angle>=ANGLELIMIT)
           {
             aux->setActive(false);
