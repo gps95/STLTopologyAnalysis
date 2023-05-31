@@ -25,7 +25,7 @@ Coord3d::Coord3d(const Coord3d &p)
 //operator overloading
 bool Coord3d::operator==(const Coord3d &other) const
 {
-  const double EPSILON=1e-5;
+  const double EPSILON=5.0e-4;
   return abs(this->x-other.x)<EPSILON&&abs(this->y-other.y)<EPSILON&&abs(this->z-other.z)<EPSILON;
 }
 
